@@ -7,6 +7,14 @@ from selenium.webdriver.support import expected_conditions as EC
 # Create a new service object for Chromedriver
 service = Service('/Users/andyjung/chromedriver1/chromedriver')
 
+# timetable wait function
+def wait_for_time_table():
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "eq-time-grid"))
+    )
+
+
+
 
 # Start Chromedriver
 driver = webdriver.Chrome(executable_path='/Users/andyjung/chromedriver1/chromedriver', service=service)
@@ -14,18 +22,8 @@ driver = webdriver.Chrome(executable_path='/Users/andyjung/chromedriver1/chromed
 # Go to the O'Neill Library Reserve Room page
 driver.get("https://libcal.bc.edu/reserve/oneill")
 
-# Wait for time table window to load
-wait = WebDriverWait(driver, 10)
-wait.until(EC.presence_of_all_elements_located((By.ID, "eq-time-grid")))
-
 # Find Date Picker window and click it twice 
-element = driver.find_element(By.CLASS_NAME, "fc-next-button btn btn-default btn-sm")
+element = driver.find_element(By.XPATH, "/html/body/div[2]/div/div[3]/main/div/div/div/div[4]/div[1]/div[1]/div[1]/div/button[2]")
 element.click() 
-
-
-
-# Wait for the clickable container to load:
-# wait.until(EC.presence_of_element_located((By.CLASS_NAME, "fc-event-title-container")))
-
-# # Click on containers for 3-6 pm on the next week  
-# driver.find_element_by_class_name("fc-event-title-container").click()
+wait_for_time_table()
+element.click()
