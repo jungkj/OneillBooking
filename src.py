@@ -6,4 +6,3 @@ driver.get("https://libcal.bc.edu/reserve/oneill")
 
 #Testing selenium run
 print(driver.title)
- 
